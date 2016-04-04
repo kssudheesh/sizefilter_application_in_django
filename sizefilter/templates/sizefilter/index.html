@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>Size Filtering App</title>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="page-header" align = center>
+    <h1>Finding Best Matches for you</h1>      
+  </div>
+
+  <form class="navbar-form navbar-left" method="post" action="/">
+            
+            {% csrf_token %}
+            
+
+            <br>
+            
+            <div class="checkbox">
+                <input type="checkbox" name="size" value="XS">Xtra-Small
+                <input type="checkbox" name="size" value="S">Small 
+                <input type="checkbox" name="size" value="M">Medium
+                <input type="checkbox" name="size" value="L">Large 
+                <input type="checkbox" name="size" value="XL">Xtra-Large
+            </div>
+
+            <br>
+            <button class="btn btn-default navbar-btn" type="submit">Refine Results</button>
+  </form>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Best Matches</div>
+  <!-- Table -->
+  <table class="table">
+    <tr><th>Name</th><th>Product Id</th><th>Size</th><th>SKU_Code</th><th>Price</th></tr>
+    {% for item in items%}
+        
+            <tr><td><a href = {{item.product.url}}>{{item.product}}</a></td><td>{{item.product.product_id}}</td><td>{{item.size}}</td><td>{{item.sku_code}}</td><td>{{item.product.price}}</td></tr>
+        
+    {% endfor%}
+  </table>
+  </div>
+</div>
+
+</body>
+
+</html>
+
